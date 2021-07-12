@@ -11,5 +11,5 @@ class Model():
     def set_sdrf_struct(self, sdrf_struct):
         self.sdrf_struct = sdrf_struct
 
-    
-    
+    # Test
+
