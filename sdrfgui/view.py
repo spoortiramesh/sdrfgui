@@ -8,7 +8,8 @@ import glob, os, shutil
 from tkinter import filedialog
 class View():
 
-    def __init__(self):
+    def __init__(self, model):
+        self.model = model
         self.secs = ["Default", "Human", "Vertebrates", "Non-vertebrates", "Plants", "Cell lines"]
         self.master = Tk()
         self.master.geometry("800x800")
@@ -37,7 +38,6 @@ class View():
 
         self.okbtn = tk.Button(self.master, text='OK',command=self.on_click)
         self.okbtn.grid(row=1, column=10)
-        mainloop()
 
 
     def next_step(self, entry):
@@ -615,6 +615,3 @@ class View():
             numno = tk.Label(self.master, text='Enter valid number')
             numno.grid(row=1, column=6)
 
-
-
-View()
