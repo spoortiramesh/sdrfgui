@@ -1,0 +1,11 @@
+{
+    "mandatory": [
+        {"Homo Sapiens": ["comment[file uri]", "characteristics[age]", "This is only one example"]}
+    ],
+    "optional": [
+        {"Homo Sapiens": ["factor value", "And other parameters which should be optional"]}
+    ],
+    "recommended": [
+        {"Homo Sapiens": ["comment[ppm]", "And other files which we want to recommend to the user to include"]}
+    ],
+}

@@ -35,4 +35,6 @@ class Controller():
 
     def get_writable_sdrf_file(self):
         """ Open a file dialog requesting the filename/loaction to save """
-        return filedialog.asksaveasfilename(defaultextension=".tsv")
+        return filedialog.asksaveasfilename(
+            initialfile="sdrf.tsv", defaultextension=".tsv", filetypes=[("Table Seperated Values (SDRF)", ".tsv")]
+        )
