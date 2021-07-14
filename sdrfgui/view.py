@@ -2,6 +2,7 @@ import csv
 
 import pandas as pd
 from tkinter import *
+import tkinter as tk
 from PIL import ImageTk, Image
 import tkinter as tk
 import glob, os, shutil
@@ -18,6 +19,9 @@ class View():
         self.v.set(self.secs[0])
         self.data = []
         self.sourcePath = None
+
+        # Load/Save sdrfs Buttons
+        [self.load_sdrf_button, self.save_sdrf_button] = self.create_load_save_buttons()
 
 
         self.folder_path = StringVar()
@@ -38,6 +42,26 @@ class View():
 
         self.okbtn = tk.Button(self.master, text='OK',command=self.on_click)
         self.okbtn.grid(row=1, column=10)
+
+    def create_load_save_buttons(self):
+        """ Creates the load and save Button and sets them on the bottom right"""
+
+        # Pack the two buttons together
+        f = Frame(self.master)
+        f.grid(row=1, column=0, columnspan=1)
+        save = tk.Button(
+            f, text="Save SDRF"
+        )
+        load = tk.Button(
+            f, text="Load SDRF"
+        )
+        save.grid(row=0, column=0)
+        load.grid(row=0, column=1)
+        
+        # Position at bottom right
+        f.place(relx=0.99, rely=0.99, anchor="se")
+
+        return load, save
 
 
     def next_step(self, entry):
