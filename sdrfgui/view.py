@@ -55,8 +55,9 @@ class View():
         load = tk.Button(
             f, text="Load SDRF"
         )
-        save.grid(row=0, column=0)
-        load.grid(row=0, column=1)
+        load.grid(row=0, column=0)
+        save.grid(row=0, column=1)
+        
         
         # Position at bottom right
         f.place(relx=0.99, rely=0.99, anchor="se")
