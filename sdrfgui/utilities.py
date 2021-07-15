@@ -22,11 +22,8 @@ def _get_remaining_header_list(keyword_list, key_amount):
             part_header.extend([key]*value)
     return part_header
 
-def save_sdrf(sdrf_struct, output_file):
-    """
-    Saves the sdrf_struct into the corresponding output file
-    """
 
+def get_sdrf_row_by_row(sdrf_struct):
     # First unpack the list columns and count how often we need to repeat one
     # TODO own function, since it might also be needed by the gui itself?
     key_amount_map = defaultdict(lambda: 0)
@@ -62,6 +59,15 @@ def save_sdrf(sdrf_struct, output_file):
             else:
                 row.append("not available SDRFGUI)") # TODO Can this case happen and if so what to add?
         rows.append(row)
+
+    return rows 
+
+def save_sdrf(sdrf_struct, output_file):
+    """
+    Saves the sdrf_struct into the corresponding output file
+    """
+    rows = get_sdrf_row_by_row(sdrf_struct)
+    
 
     #  TODO Maybe up to this point a list of lists is returned which may be usefull for the GUI itself!
     with open(output_file, "w") as out_file:
