@@ -1,12 +1,155 @@
 {
-    "mandatory": {
-        "Homo Sapiens": ["comment[file uri]", "characteristics[age]", "This is only one example"]
-    }
-    ,
-    "optional": {
-        "Homo Sapiens": ["factor value", "And other parameters which should be optional"]
+    "Default": { 
+        "mandatory": [
+            "source name", 
+            "characteristics[organism]", 
+            "characteristics[disease]", 
+            "charactersitics[organism part]", 
+            "charactersitics[cell type]",
+            "comment[cleavage agent details]",
+            "comment[data file]", 
+            "comment[fraction identifier]", 
+            "comment[label]"
+        ],
+        "optional": [
+            "assay name"
+        ],
+        "recommended": [
+            "comment[modification parameters]",
+            "comment[dissociation method]",
+            "comment[collision energy]",
+            "comment[precursor mass tolerance]",
+            "comment[fragment mass tolerance]"
+        ]
     },
-    "recommended": {
-        "Homo Sapiens": ["comment[ppm]", "And other files which we want to recommend to the user to include"]
+    "Human": { 
+        "mandatory": [
+            "source name", 
+            "characteristics[organism]",
+            "characteristics[ethnicity]",
+            "characteristics[age]",
+            "characteristics[developmental stage]",
+            "characteristics[sex]",
+            "characteristics[disease]", 
+            "charactersitics[organism part]", 
+            "charactersitics[cell type]", 
+            "characteristics[individual]",
+            "comment[cleavage agent details]",
+            "comment[data file]", 
+            "comment[fraction identifier]", 
+            "comment[label]"
+        ],
+        "optional": [
+            "characteristics[developmental stage]",
+            "assay name",
+            "characteristics[individual]"
+        ],
+        "recommended": [
+            "comment[modification parameters]",
+            "comment[dissociation method]",
+            "comment[collision energy]",
+            "comment[precursor mass tolerance]",
+            "comment[fragment mass tolerance]"
+        ]
+    },
+    "Vertebrates": { 
+        "mandatory": [
+            "source name", 
+            "characteristics[organism]",
+            "characteristics[disease]", 
+            "charactersitics[organism part]", 
+            "charactersitics[cell type]", 
+            "characteristics[individual]",
+            "comment[cleavage agent details]",
+            "comment[data file]", 
+            "comment[fraction identifier]", 
+            "comment[label]"
+        ],
+        "optional": [
+            "characteristics[developmental stage]:",
+            "assay name",
+            "characteristics[individual]"
+        ],
+        "recommended": [
+            "comment[modification parameters]",
+            "comment[dissociation method]",
+            "comment[collision energy]",
+            "comment[precursor mass tolerance]",
+            "comment[fragment mass tolerance]"
+        ]
+    },
+    "Non-vertebrates": { 
+        "mandatory": [
+            "source name", 
+            "characteristics[organism]",
+            "charactersitics[cell type]", 
+            "characteristics[individual]",
+            "comment[cleavage agent details]",
+            "comment[data file]", 
+            "comment[fraction identifier]", 
+            "comment[label]"
+        ],
+        "optional": [
+            "assay name",
+            "characteristics[individual]",
+            "characteristics[strain/breed]"
+        ],
+        "recommended": [
+            "comment[modification parameters]",
+            "comment[dissociation method]",
+            "comment[collision energy]",
+            "comment[precursor mass tolerance]",
+            "comment[fragment mass tolerance]"
+        ]
+    },
+    "Plants": { 
+        "mandatory": [
+            "source name", 
+            "characteristics[organism]",
+            "characteristics[organism part]",
+            "charactersitics[cell type]",
+            "comment[cleavage agent details]",
+            "comment[data file]", 
+            "comment[fraction identifier]", 
+            "comment[label]"
+        ],
+        "optional": [
+            "assay name",
+            "characteristics[individual]"
+        ],
+        "recommended": [
+            "comment[modification parameters]",
+            "comment[dissociation method]",
+            "comment[collision energy]",
+            "comment[precursor mass tolerance]",
+            "comment[fragment mass tolerance]"
+        ]
+    },
+    "Cell lines": { 
+        "mandatory": [
+            "source name", 
+            "characteristics[organism]",
+            "characteristics[disease]",
+            "characteristics[organism part]",
+            "charactersitics[cell type]", 
+            "charactersitics[cell line]",
+            "comment[cleavage agent details]",
+            "comment[data file]", 
+            "comment[fraction identifier]", 
+            "comment[label]"
+        ],
+        "optional": [
+            "assay name",
+            "characteristics[individual]",
+            "characteristics[strain/breed]"
+        ],
+        "recommended": [
+            "comment[modification parameters]",
+            "comment[dissociation method]",
+            "comment[collision energy]",
+            "comment[precursor mass tolerance]",
+            "comment[fragment mass tolerance]"
+        ]
     }
 }
+
