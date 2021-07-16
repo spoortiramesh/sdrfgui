@@ -7,6 +7,7 @@ from PIL import ImageTk, Image
 import tkinter as tk
 import glob, os, shutil
 from tkinter import filedialog
+from tkinter import ttk
 class View():
 
     def __init__(self, model):
@@ -42,6 +43,12 @@ class View():
 
         self.okbtn = tk.Button(self.master, text='OK',command=self.on_click)
         self.okbtn.grid(row=1, column=10)
+
+        self.tree_frame = tk.Frame(self.master, width=400, height=200)
+        self.tree_frame.grid(row=30, column=1, columnspan=3, rowspan=9, padx=1)
+
+
+
 
     def create_load_save_buttons(self):
         """ Creates the load and save Button and sets them on the bottom right"""
@@ -90,7 +97,7 @@ class View():
         os.chdir(self.sourcePath)  # Provide the path here
 
 
-    def saveinfo(self):
+    def saveinfo(self,list):
         valor0=entry0.get()
         valor1 = entry1.get()
         valor2 = entry2.get()
@@ -103,19 +110,20 @@ class View():
         valor9 = entry9.get()
         valor10 = entry10.get()
         valor11=entry11.get()
-        self.data.append([valor0,valor1, valor2, valor3,valor4,valor5,valor6,valor7,valor8,valor9,valor10,valor11])
-        print(self.data)    
+        self.data=[valor0,valor1, valor2, valor3,valor4,valor5,valor6,valor7,valor8,valor9,valor10,valor11]
+        self.populate_treeview(list,self.data)
+
 
     def export(self):
-        with open('test_sdrf.tsv', 'w', encoding='UTF8') as f:
-            list_human=['Source Name','characteristics[organism]','characteristics[organism parts]','characteristics[cell type]','characteristics[developmental stage]','characteristics[disease]','characteristics[sex]','characteristics[individual]','characteristics[cell line]','comment[data file]','comment[fraction identifier]','comment[label]']
-            f = pd.DataFrame(self.data,columns=list_human)
-            nan_value = float("NaN")
-            f.replace("", nan_value, inplace=True)
-            f.dropna(how='all', axis=1, inplace=True)
-            filename = "sdrf_test.tsv"
-            path = os.path.join(self.sourcePath, filename)
-            f.to_csv(path,sep="\t")
+        list_human=['Source Name','characteristics[organism]','characteristics[organism parts]','characteristics[cell type]','characteristics[developmental stage]','characteristics[disease]','characteristics[sex]','characteristics[individual]','characteristics[cell line]','comment[data file]','comment[fraction identifier]','comment[label]']
+
+        f = pd.DataFrame(self.data,columns=list_human)
+        nan_value = float("NaN")
+        f.replace("", nan_value, inplace=True)
+        f.dropna(how='all', axis=1, inplace=True)
+        filename = "sdrf_test.tsv"
+        path = os.path.join(self.sourcePath, filename)
+        f.to_csv(path,sep="\t")
 
     def saveinfo_ver(self):
         valor0=entry0.get()
@@ -219,7 +227,16 @@ class View():
             filename = "sdrf_test.tsv"
             path = os.path.join(self.sourcePath, filename)
             f.to_csv(path,sep="\t")
+    def populate_treeview(self,list,val):
+        ''' Adds values from the user to the Preview table'''
+        '''TODO: The values are added horizontally on 1 columns instead of vertically,code change is required'''
+        vals = val
+        print(vals)
+        dict_sdrf = dict(zip(list, vals))
+        for values in dict_sdrf.values():
+            self.tree.insert('', tk.END, values=values)
 
+        print(dict_sdrf)
     def on_option_change(self, event):       
         global entry0
         global entry1
@@ -245,62 +262,102 @@ class View():
 
 
         if self.v.get() == 'Human':
-                entry0 = tk.Entry(self.master)
-                entry0.grid(row=2, column=1)
-                lab0 = tk.Label(self.master, text='Source Name')
+            list_human = ['Source Name', 'characteristics[organism]', 'characteristics[organism parts]',
+                          'characteristics[cell type]', 'characteristics[developmental stage]',
+                          'characteristics[disease]', 'characteristics[sex]', 'characteristics[individual]',
+                          'characteristics[cell line]', 'comment[data file]', 'comment[fraction identifier]',
+                          'comment[label]']
+
+            entry0 = tk.Entry(self.master)
+            entry0.grid(row=2, column=1)
+            lab0 = tk.Label(self.master, text='Source Name')
                 
-                lab0.grid(row=2, column=0, sticky=E)
+            lab0.grid(row=2, column=0, sticky=E)
+            entry1 = tk.Entry(self.master)
+            entry1.grid(row=3, column=1)
+            lab1 = tk.Label(self.master, text='characteristics[organism]')
+            lab1.grid(row=3, column=0, sticky=E)
+            entry2 = tk.Entry(self.master)
+            entry2.grid(row=4, column=1)
+            lab2 = tk.Label(self.master, text='characteristics[organism parts]')
+            lab2.grid(row=4, column=0, sticky=E)
+            entry3 = tk.Entry(self.master)
+            entry3.grid(row=5, column=1)
+            lab3 = tk.Label(self.master, text='characteristics[cell type]')
+            lab3.grid(row=5,column=0,sticky=E)
+            entry4 = tk.Entry(self.master)
+            entry4.grid(row=6, column=1)
+            lab4 = tk.Label(self.master, text='characteristics[developmental stage]')
+            lab4.grid(row=6, column=0, sticky=E)
+            entry5 = tk.Entry(self.master)
+            entry5.grid(row=7, column=1)
+            lab5 = tk.Label(self.master, text='characteristics[disease]')
+            lab5.grid(row=7, column=0, sticky=E)
+            entry6 = tk.Entry(self.master)
+            entry6.grid(row=8, column=1)
+            lab6 = tk.Label(self.master, text='characteristics[sex]')
+            lab6.grid(row=8, column=0, sticky=E)
+            entry7 = tk.Entry(self.master)
+            entry7.grid(row=9, column=1)
+            lab7 = tk.Label(self.master, text='characteristics[individual]')
+            lab7.grid(row=9, column=0, sticky=E)
+            entry8 = tk.Entry(self.master)
+            entry8.grid(row=10, column=1)
+            lab8=tk.Label(self.master, text='characteristics[cell line]')
+            lab8.grid(row=10, column=0, sticky=E)
                 
-                entry1 = tk.Entry(self.master)
-                entry1.grid(row=3, column=1)
-                lab1 = tk.Label(self.master, text='characteristics[organism]')
-                lab1.grid(row=3, column=0, sticky=E)
-                entry2 = tk.Entry(self.master)
-                entry2.grid(row=4, column=1)
-                lab2 = tk.Label(self.master, text='characteristics[organism parts]')
-                lab2.grid(row=4, column=0, sticky=E)
-                entry3 = tk.Entry(self.master)
-                entry3.grid(row=5, column=1)
-                lab3 = tk.Label(self.master, text='characteristics[cell type]')       
-                lab3.grid(row=5,column=0,sticky=E)        
-                entry4 = tk.Entry(self.master)
-                entry4.grid(row=6, column=1)
-                lab4 = tk.Label(self.master, text='characteristics[developmental stage]')
-                lab4.grid(row=6, column=0, sticky=E)
-                entry5 = tk.Entry(self.master)
-                entry5.grid(row=7, column=1)
-                lab5 = tk.Label(self.master, text='characteristics[disease]')
-                lab5.grid(row=7, column=0, sticky=E)
-                entry6 = tk.Entry(self.master)
-                entry6.grid(row=8, column=1)
-                lab6 = tk.Label(self.master, text='characteristics[sex]')
-                lab6.grid(row=8, column=0, sticky=E)
-                entry7 = tk.Entry(self.master)
-                entry7.grid(row=9, column=1)
-                lab7 = tk.Label(self.master, text='characteristics[individual]')
-                lab7.grid(row=9, column=0, sticky=E)
-                entry8 = tk.Entry(self.master)
-                entry8.grid(row=10, column=1)    
-                lab8=tk.Label(self.master, text='characteristics[cell line]')
-                lab8.grid(row=10, column=0, sticky=E)
-                
-                entry9 = tk.Entry(self.master)
-                entry9.grid(row=11, column=1)
-                lab9 = tk.Label(self.master, text='comment[data file]')
-                lab9.grid(row=11, column=0, sticky=E)
-                entry10 = tk.Entry(self.master)
-                entry10.grid(row=12, column=1)
-                lab10 = tk.Label(self.master, text='comment[fraction identifier]')
-                lab10.grid(row=12, column=0, sticky=E)
-                entry11 = tk.Entry(self.master)
-                entry11.grid(row=13, column=1)
-                lab11 = tk.Label(self.master, text='comment[label]')       
-                lab11.grid(row=13,column=0,sticky=E)
-            
-                button1 = tk.Button(text='Save',command=self.saveinfo)
-                button1.grid(row=20, column=1, sticky=W)
-                button2 = tk.Button(text='Export as .tsv', command=self.export)
-                button2.grid(row=20, column=2, sticky=W)
+            entry9 = tk.Entry(self.master)
+            entry9.grid(row=11, column=1)
+            lab9 = tk.Label(self.master, text='comment[data file]')
+            lab9.grid(row=11, column=0, sticky=E)
+            entry10 = tk.Entry(self.master)
+            entry10.grid(row=12, column=1)
+            lab10 = tk.Label(self.master, text='comment[fraction identifier]')
+            lab10.grid(row=12, column=0, sticky=E)
+            entry11 = tk.Entry(self.master)
+            entry11.grid(row=13, column=1)
+            lab11 = tk.Label(self.master, text='comment[label]')
+            lab11.grid(row=13,column=0,sticky=E)
+
+            button1 = tk.Button(text='Save', command=lambda: self.saveinfo(list_human))
+            button1.grid(row=20, column=1, sticky=W)
+            button2 = tk.Button(text='Export as .tsv', command=self.export)
+            button2.grid(row=20, column=2, sticky=W)
+
+
+
+
+            self.tree = ttk.Treeview(self.tree_frame, show='headings', columns=list_human)
+            self.tree.heading('Source Name', text='Source Name')
+            self.tree.heading('characteristics[organism]', text='characteristics[organism]')
+            self.tree.heading('characteristics[organism parts]', text='characteristics[organism parts]')
+            self.tree.heading('characteristics[cell type]', text='characteristics[cell type]')
+            self.tree.heading('characteristics[developmental stage]', text='characteristics[developmental stage]')
+            self.tree.heading('characteristics[disease]', text='characteristics[disease]')
+            self.tree.heading('characteristics[sex]', text='characteristics[sex]')
+            self.tree.heading('characteristics[individual]', text='characteristics[individual]')
+            self.tree.heading('characteristics[individual]', text='characteristics[individual]')
+            self.tree.heading('characteristics[cell line]', text='characteristics[cell line]')
+            self.tree.heading('comment[data file]', text='comment[data file]')
+            self.tree.heading('comment[data file]', text='comment[fraction identifier]')
+            self.tree.heading('comment[label]', text='comment[label]')
+
+            '''Creates Preview Table for Humans'''
+            '''TODO 1. The same Treeview needs to be added to all species
+                    2. The table does not fit the dimensions of the window
+                    3. The scrollbar doesn't seem to be working'''
+            self.tree.grid(row=25, column=0, sticky='nsew', in_=self.tree_frame)
+            # add a scrollbar
+            self.scrollbary = ttk.Scrollbar(self.master, orient=tk.VERTICAL, command=self.tree.yview)
+            self.scrollbarx = ttk.Scrollbar(self.master, orient=tk.HORIZONTAL, command=self.tree.xview)
+            self.scrollbary.grid(row=0, column=100, sticky='ns',in_=self.tree_frame)
+
+            self.scrollbarx.grid(row=50, column=0, rowspan=4,columnspan=3,sticky='ew',in_=self.tree_frame)
+            self.tree.configure(yscrollcommand=self.scrollbary.set, xscrollcommand=self.scrollbarx.set)
+
+
+
+
 
             
         elif self.v.get() == 'Vertebrates':
@@ -639,4 +696,5 @@ class View():
         else:
             numno = tk.Label(self.master, text='Enter valid number')
             numno.grid(row=1, column=6)
+
 
